@@ -1,0 +1,36 @@
+<p>sing-up works!</p>
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <div>
+    <label for="login"> login </label>
+    <input name="login" formControlName="login" />
+    <div *ngIf="form.controls.login.errors && isSubmited$.value" style="color: red" class="error">Required</div>
+  </div>
+  <div>
+    <label for="email"> email </label>
+    <input name="email" formControlName="email" />
+    <div *ngIf="form.controls.email.errors && isSubmited$.value" style="color: red" class="error">Required</div>
+  </div>
+  <div>
+    <label for="name"> name </label>
+    <input name="name" formControlName="name" />
+    <div *ngIf="form.controls.name.errors && isSubmited$.value" style="color: red" class="error">Required</div>
+  </div>
+  <div>
+    <label for="pass"> pass </label>
+    <input name="pass" formControlName="pass" />
+    <div *ngIf="form.controls.pass.errors && isSubmited$.value" style="color: red" class="error">Required</div>
+  </div>
+  <div>
+    <label for="repeatPassword"> repeatPassword </label>
+    <input name="repeatPassword" formControlName="repeatPassword" />
+    <div *ngIf="form.controls.repeatPassword.errors && isSubmited$.value" style="color: red" class="error">Required</div>
+  </div>
+  <div>
+    <label for="phone"> phone </label>
+    <span>+</span>
+    <input name="phone" formControlName="phone" />
+    <div *ngIf="form.controls.phone.errors && isSubmited$.value" style="color: red" class="error">Required</div>
+  </div>
+  <button>submit</button>
+</form>
+<button routerLink="/sing-in">got to sing-in</button>

@@ -1,0 +1,26 @@
+.block {
+  width: 200px;
+  border-radius: 3px;
+  margin-bottom: 10px;
+  display: flex;
+  overflow: hidden;
+  align-items: center;
+  height: 30px;
+  cursor: pointer;
+  > * {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }  
+  .id {
+    width: 15%;
+    background-color: blueviolet;
+    color: white;
+  }
+  .name {
+    width: 85%;
+    background-color: gray;
+    color: blueviolet;
+  }
+}
