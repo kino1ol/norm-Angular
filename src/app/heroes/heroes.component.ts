@@ -4,8 +4,8 @@ import { Hero } from "src/app/types/heroes";
 
 @Component({
   selector: "app-dashboard",
-  templateUrl: "./dashboard.component.html",
-  styleUrls: ["./dashboard.component.scss"],
+  templateUrl: "./heroes.component.html",
+  styleUrls: ["./heroes.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DashboardComponent implements OnInit {

@@ -1,14 +1,16 @@
+<div class="sing-in">
 <form [formGroup]="form" (ngSubmit)="submit()">
   <div>
     <label for="login"> login </label>
     <input name="login" formControlName="login" />
-    <div *ngIf="form.controls.login.errors && form.controls.login.touched" class="error">Required</div>
+    <div *ngIf="form.controls.login.errors && isSubmited" class="error">wrong</div>
   </div>
   <div>
     <label for="pass"> password </label>
     <input name="pass" formControlName="pass" />
-    <div *ngIf="form.controls.pass.errors && form.controls.pass.touched" class="error">Required</div>
+    <div *ngIf="form.controls.pass.errors && isSubmited" class="error">wrong</div>
   </div>
   <button>submit</button>
 </form>
-<button routerLink="/sing-up">sing-up</button>
+<button routerLink="/sing/up">sing-up</button>
+</div>

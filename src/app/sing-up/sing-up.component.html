@@ -1,36 +1,39 @@
+<div class="center">
 <p>sing-up works!</p>
 <form [formGroup]="form" (ngSubmit)="submit()">
   <div>
     <label for="login"> login </label>
     <input name="login" formControlName="login" />
-    <div *ngIf="form.controls.login.errors && isSubmited$.value" style="color: red" class="error">Required</div>
+    <div *ngIf="form.controls.login.errors && isSubmited" style="color: red" class="error">wrong</div>
   </div>
   <div>
     <label for="email"> email </label>
     <input name="email" formControlName="email" />
-    <div *ngIf="form.controls.email.errors && isSubmited$.value" style="color: red" class="error">Required</div>
+    <div *ngIf="form.controls.email.errors && isSubmited" style="color: red" class="error">wrong</div>
   </div>
   <div>
     <label for="name"> name </label>
     <input name="name" formControlName="name" />
-    <div *ngIf="form.controls.name.errors && isSubmited$.value" style="color: red" class="error">Required</div>
+    <div *ngIf="form.controls.name.errors && isSubmited" style="color: red" class="error">wrong</div>
   </div>
   <div>
     <label for="pass"> pass </label>
     <input name="pass" formControlName="pass" />
-    <div *ngIf="form.controls.pass.errors && isSubmited$.value" style="color: red" class="error">Required</div>
+    <div *ngIf="form.controls.pass.errors && isSubmited" style="color: red" class="error">wrong</div>
   </div>
   <div>
     <label for="repeatPassword"> repeatPassword </label>
     <input name="repeatPassword" formControlName="repeatPassword" />
-    <div *ngIf="form.controls.repeatPassword.errors && isSubmited$.value" style="color: red" class="error">Required</div>
+    <div *ngIf="form.controls.repeatPassword.errors && isSubmited && passIsEqual()" style="color: red" class="error">wrong</div>
+    <div *ngIf="!passIsEqual() && isSubmited && form.controls.repeatPassword.errors" style="color: red" class="error">password no equal</div>
   </div>
-  <div>
+  <div class="phone">
     <label for="phone"> phone </label>
     <span>+</span>
     <input name="phone" formControlName="phone" />
-    <div *ngIf="form.controls.phone.errors && isSubmited$.value" style="color: red" class="error">Required</div>
+    <div *ngIf="form.controls.phone.errors && isSubmited" style="color: red" class="error">wrong</div>
   </div>
   <button>submit</button>
 </form>
-<button routerLink="/sing-in">got to sing-in</button>
+<button routerLink="/sing/in">got to sing-in</button>
+</div>

@@ -1,8 +1,7 @@
-import { HttpClient } from '@angular/common/http';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
+import { SingService } from '../services/sing.service';
 
 const validator: ValidatorFn = (
   control: AbstractControl
@@ -34,49 +33,32 @@ export class SingUpComponent {
     phone: new FormControl("", [Validators.pattern("^[0-9]{9,15}"), Validators.required])
   })
 
-  public isSubmited$ = new BehaviorSubject<boolean>(false)
+  public isSubmited = false
 
   constructor(
-    public http: HttpClient,
-    public route: Router
+    public route: Router,
+    public singService: SingService
   ) { }
 
-  get email(): FormControl<string | null> {
-    return this.form.controls.email
+  public passIsEqual(): boolean {
+    return this.form.value.pass === this.form.value.repeatPassword
   }
-
-  get name(): FormControl<string | null> {
-    return this.form.controls.name
-  }
-  get login(): FormControl<string | null> {
-    return this.form.controls.login
-  }
-  get pass(): FormControl<string | null> {
-    return this.form.controls.pass
-  }
-  get repeatPassword(): FormControl<string | null> {
-    return this.form.controls.repeatPassword
-  }
-  get phone(): FormControl<string | null> {
-    return this.form.controls.phone
-  }
-
 
   public submit(): void {
-    if (this.form.valid) {
-      this.isSubmited$.next(false)
-      this.http.post('https://dummyjson.com/users/add', JSON.stringify({
-        login: this.login.value,
-        name: this.name.value,
-        email: this.email.value,
-        pass: this.pass.value,
-        repeatPassword: this.pass.value,
-        phone: this.pass.value,
-      })).subscribe((_) => {
-        this.route.navigate(['sing-in'])
+    if (this.form.valid && this.passIsEqual()) {
+      this.isSubmited = false
+      this.singService.singUp({
+        login: this.form.value.login,
+        name: this.form.value.name,
+        email: this.form.value.email,
+        pass: this.form.value.pass,
+        repeatPassword: this.form.value.repeatPassword,
+        phone: this.form.value.phone,
+      }).subscribe((_) => {
+        this.route.navigate(['heroes'])
       })
     } else {
-      this.isSubmited$.next(true)
+      this.isSubmited = true
     }
   }
 }

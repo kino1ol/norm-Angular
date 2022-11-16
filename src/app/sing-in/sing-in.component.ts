@@ -1,8 +1,7 @@
-import { HttpClient } from '@angular/common/http';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
+import { SingService } from '../services/sing.service';
 
 @Component({
   selector: 'app-sing-in',
@@ -16,35 +15,26 @@ export class SingInComponent {
     login: new FormControl<string>('', Validators.required),
     pass: new FormControl<string>('', Validators.required)
   })
-  public isSubmited$ = new BehaviorSubject<boolean>(false)
+  public isSubmited = false
 
   constructor(
-    public http: HttpClient,
+    public singService: SingService,
     public route: Router
   ) { }
-  get login(): FormControl<string | null> {
-    return this.form.controls.login
-  }
-
-  get pass(): FormControl<string | null> {
-    return this.form.controls.pass
-  }
 
   public submit(): void {
     if (this.form.valid) {
-      this.isSubmited$.next(false)
-      this.http.post('https://dummyjson.com/auth/login', JSON.stringify({
-        login: this.login.value,
-        pass: this.pass.value,
-      })).subscribe({
-        error: () => {
-          console.log('all good');
-          this.route.navigate(['main'])
-          localStorage.setItem('token', 'token');
-        },
+      this.isSubmited = false
+      this.singService.singIn(
+        this.form.value.login as string,
+        this.form.value.pass as string,
+      ).subscribe((res) => {
+        localStorage.setItem('token', res.token)
+        this.route.navigate(['heroes'])
       })
+      
     } else {
-      this.isSubmited$.next(true)
+      this.isSubmited = true
     }
   }
 
