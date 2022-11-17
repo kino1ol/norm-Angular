@@ -24,10 +24,10 @@ export class SignUpComponent {
 
   public form = new FormGroup({
     login: new FormControl<string>('', Validators.required),
-    name: new FormControl<string>('', [Validators.required, Validators.min(6), Validators.max(64)]),
+    name: new FormControl<string>('', [Validators.required, Validators.minLength(6), Validators.maxLength(64)]),
     email: new FormControl<string>('', [Validators.required, Validators.email]),
     pass: new FormControl<string>('',
-      [Validators.required, Validators.min(8), Validators.max(64), validator],
+      [Validators.required, Validators.minLength(8), Validators.maxLength(64), validator],
     ),
     repeatPassword: new FormControl("", [Validators.required]),
     phone: new FormControl("", [Validators.pattern("^[0-9]{9,15}")])
@@ -45,6 +45,7 @@ export class SignUpComponent {
   }
 
   public submit(): void {
+    console.log(this.form.controls);
     if (this.form.valid && this.passIsEqual()) {
       this.isSubmited = false
       this.signService.signUp({

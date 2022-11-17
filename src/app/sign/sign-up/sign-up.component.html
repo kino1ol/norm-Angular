@@ -16,14 +16,14 @@
       <label for="email"> email </label>
       <input name="email" formControlName="email" />
       <div
-        *ngIf="form.controls.email.errors?.['reqiured'] && isSubmited"
+        *ngIf="form.get('email')?.hasError('required') && isSubmited"
         style="color: red"
         class="error"
       >
         reqiured
       </div>
       <div
-        *ngIf="form.controls.email.errors?.['email'] && isSubmited"
+        *ngIf="form.get('email')?.hasError('email') && isSubmited"
         style="color: red"
         class="error"
       >
@@ -34,21 +34,21 @@
       <label for="name"> name </label>
       <input name="name" formControlName="name" />
       <div
-        *ngIf="form.controls.name?.errors?.['reqiured'] && isSubmited"
+        *ngIf="form.get('name')?.hasError('required') && isSubmited"
         style="color: red"
         class="error"
       >
         reqiured
       </div>
       <div
-        *ngIf="form.controls.name.errors?.['min'] && isSubmited"
+        *ngIf="form.get('name')?.hasError('minlength') && isSubmited"
         style="color: red"
         class="error"
       >
         Min length is 6 symbols
       </div>
       <div
-        *ngIf="form.controls.name.errors?.['max'] && isSubmited"
+        *ngIf="form.get('name')?.hasError('maxlength') && isSubmited"
         style="color: red"
         class="error"
       >
