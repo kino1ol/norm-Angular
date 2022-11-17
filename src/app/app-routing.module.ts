@@ -1,20 +1,21 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
-import { AuthGuardService } from "./auth/auth-guard-service.service";
+import { AuthService } from "./auth/authService.service";
+
 
 const routes: Routes = [
   {
     path: "",
-    redirectTo: !!localStorage.getItem('token') ? "heroes" : "sing", // $-)
+    redirectTo: !!localStorage.getItem('token') ? "heroes" : "sign", // $-)
     pathMatch: 'full',
   },
-  { path: 'heroes', loadChildren: () => import('./heroes/heroes.module').then(m => m.HeroesModule), canActivate: [AuthGuardService], },
-  { path: 'sing', loadChildren: () => import('./sing/sing.module').then(m => m.SingModule) }
+  { path: 'heroes', loadChildren: () => import('./heroes/heroes.module').then(m => m.HeroesModule), canActivate: [AuthService], },
+  { path: 'sign', loadChildren: () => import('./sign/sign.module').then(m => m.SignModule) }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  providers: [AuthGuardService],
+  providers: [AuthService],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

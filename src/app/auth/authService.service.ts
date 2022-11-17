@@ -2,13 +2,13 @@ import { Injectable } from "@angular/core";
 import { Router, CanActivate } from "@angular/router";
 
 @Injectable()
-export class AuthGuardService implements CanActivate {
+export class AuthService implements CanActivate {
   constructor(public router: Router) {}
 
   public canActivate(): boolean {
     const token = localStorage.getItem("token");
     if (!token) {
-      this.router.navigate(["sign-in"]);
+      this.router.navigate(["sign/in"]);
       return false;
     }
     return true;

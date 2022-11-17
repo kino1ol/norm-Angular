@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { SingService } from '../services/sing.service';
+import { SignService } from '../services/sign.service';
 
 const validator: ValidatorFn = (
   control: AbstractControl
@@ -15,12 +15,12 @@ const validator: ValidatorFn = (
 };
 
 @Component({
-  selector: 'app-sing-up',
-  templateUrl: './sing-up.component.html',
-  styleUrls: ['./sing-up.component.scss'],
+  selector: 'app-sign-up',
+  templateUrl: './sign-up.component.html',
+  styleUrls: ['./sign-up.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SingUpComponent {
+export class SignUpComponent {
 
   public form = new FormGroup({
     login: new FormControl<string>('', Validators.required),
@@ -30,14 +30,14 @@ export class SingUpComponent {
       [Validators.required, Validators.min(8), Validators.max(64), validator],
     ),
     repeatPassword: new FormControl("", [Validators.required]),
-    phone: new FormControl("", [Validators.pattern("^[0-9]{9,15}"), Validators.required])
+    phone: new FormControl("", [Validators.pattern("^[0-9]{9,15}")])
   })
 
   public isSubmited = false
 
   constructor(
     public route: Router,
-    public singService: SingService
+    public signService: SignService
   ) { }
 
   public passIsEqual(): boolean {
@@ -47,7 +47,7 @@ export class SingUpComponent {
   public submit(): void {
     if (this.form.valid && this.passIsEqual()) {
       this.isSubmited = false
-      this.singService.singUp({
+      this.signService.signUp({
         login: this.form.value.login,
         name: this.form.value.name,
         email: this.form.value.email,

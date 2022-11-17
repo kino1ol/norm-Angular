@@ -1,15 +1,15 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { SingService } from '../services/sing.service';
+import { SignService } from '../services/sign.service';
 
 @Component({
-  selector: 'app-sing-in',
-  templateUrl: './sing-in.component.html',
-  styleUrls: ['./sing-in.component.scss'],
+  selector: 'app-sign-in',
+  templateUrl: './sign-in.component.html',
+  styleUrls: ['./sign-in.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SingInComponent {
+export class SignInComponent {
 
   public form = new FormGroup({
     login: new FormControl<string>('', Validators.required),
@@ -18,14 +18,14 @@ export class SingInComponent {
   public isSubmited = false
 
   constructor(
-    public singService: SingService,
+    public signService: SignService,
     public route: Router
   ) { }
 
   public submit(): void {
     if (this.form.valid) {
       this.isSubmited = false
-      this.singService.singIn(
+      this.signService.signIn(
         this.form.value.login as string,
         this.form.value.pass as string,
       ).subscribe((res) => {

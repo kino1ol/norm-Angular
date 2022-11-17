@@ -1,0 +1,108 @@
+<div class="center">
+  <p>sign-up works!</p>
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <div>
+      <label for="login"> login </label>
+      <input name="login" formControlName="login" />
+      <div
+        *ngIf="form.controls.login.errors && isSubmited"
+        style="color: red"
+        class="error"
+      >
+        reqiured
+      </div>
+    </div>
+    <div>
+      <label for="email"> email </label>
+      <input name="email" formControlName="email" />
+      <div
+        *ngIf="form.controls.email.errors?.['reqiured'] && isSubmited"
+        style="color: red"
+        class="error"
+      >
+        reqiured
+      </div>
+      <div
+        *ngIf="form.controls.email.errors?.['email'] && isSubmited"
+        style="color: red"
+        class="error"
+      >
+        correct email format
+      </div>
+    </div>
+    <div>
+      <label for="name"> name </label>
+      <input name="name" formControlName="name" />
+      <div
+        *ngIf="form.controls.name?.errors?.['reqiured'] && isSubmited"
+        style="color: red"
+        class="error"
+      >
+        reqiured
+      </div>
+      <div
+        *ngIf="form.controls.name.errors?.['min'] && isSubmited"
+        style="color: red"
+        class="error"
+      >
+        Min length is 6 symbols
+      </div>
+      <div
+        *ngIf="form.controls.name.errors?.['max'] && isSubmited"
+        style="color: red"
+        class="error"
+      >
+        Max length is 64 symbols
+      </div>
+    </div>
+    <div>
+      <label for="pass"> pass </label>
+      <input name="pass" formControlName="pass" />
+      <div
+        *ngIf="form.controls.pass.errors && isSubmited"
+        style="color: red"
+        class="error"
+      >
+        pass should content minimum 1 number and 1 big latter
+      </div>
+    </div>
+    <div>
+      <label for="repeatPassword"> repeatPassword </label>
+      <input name="repeatPassword" formControlName="repeatPassword" />
+      <div
+        *ngIf="
+          form.controls.repeatPassword.errors && isSubmited && passIsEqual()
+        "
+        style="color: red"
+        class="error"
+      >
+        wrong
+      </div>
+      <div
+        *ngIf="
+          !passIsEqual() && isSubmited && form.controls.repeatPassword.errors
+        "
+        style="color: red"
+        class="error"
+      >
+        password no equal
+      </div>
+    </div>
+    <div class="phone">
+      <label for="phone"> phone </label>
+      <div class="united">
+        <span>+</span>
+        <input name="phone" formControlName="phone" />
+      </div>
+      <div
+        *ngIf="form.controls.phone.errors && isSubmited"
+        style="color: red"
+        class="error"
+      >
+        phone is no correct format
+      </div>
+    </div>
+    <button>submit</button>
+  </form>
+  <button routerLink="/sign/in">got to sign-in</button>
+</div>
