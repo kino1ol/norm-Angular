@@ -41,6 +41,7 @@ export class SignUpComponent {
   ) { }
 
   public passIsEqual(): boolean {
+    console.log(this.form.value.pass === this.form.value.repeatPassword)
     return this.form.value.pass === this.form.value.repeatPassword
   }
 
