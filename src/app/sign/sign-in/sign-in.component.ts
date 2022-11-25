@@ -30,6 +30,7 @@ export class SignInComponent {
         this.form.value.pass as string,
       ).subscribe((res) => {
         localStorage.setItem('token', res.token)
+        localStorage.setItem('id', String(res.id))
         this.route.navigate(['heroes'])
       })
       

@@ -6,11 +6,11 @@ import { AuthService } from "./auth/authService.service";
 const routes: Routes = [
   {
     path: "",
-    redirectTo: !!localStorage.getItem('token') ? "heroes" : "sign", // $-)
+    redirectTo: !!localStorage.getItem('token') ? "todo" : "sign",
     pathMatch: 'full',
   },
-  { path: 'heroes', loadChildren: () => import('./heroes/heroes.module').then(m => m.HeroesModule), canActivate: [AuthService], },
-  { path: 'sign', loadChildren: () => import('./sign/sign.module').then(m => m.SignModule) }
+  { path: 'sign', loadChildren: () => import('./sign/sign.module').then(m => m.SignModule) },
+  { path: 'todo', loadChildren: () => import('./todo/todo.module').then(m => m.TodoModule), canActivate: [AuthService] }
 ];
 
 @NgModule({

@@ -1,0 +1,13 @@
+* {
+  display: flex;
+  gap: 5px;
+}
+
+button {
+  border: 0;
+  width: 60px;
+  height: 20px;
+  background-color: bisque;
+  border-radius: 5px;
+  justify-content: center;
+}

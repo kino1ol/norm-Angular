@@ -1,0 +1,34 @@
+<div class="item">
+  <div class="itemData">
+    <div class="itemColumn">
+      <p>{{ item.id }}</p>
+    </div>
+    <div class="itemColumn">
+      <input type="checkbox" [value]="completed.value" [formControl]="completed" (change)="updateItem($event)">
+    </div>
+    <div class="itemColumn">
+      <p *ngIf="!isEditing">
+        {{ field.value }}
+      </p>
+      <textarea *ngIf="isEditing" [formControl]="field"></textarea>
+    </div>
+  </div>
+  <div class="itemActions">
+    <div *ngIf="isEditing">
+      <button (click)="updateItem(undefined)">
+        save
+      </button>
+      <button (click)="changeIsEditing()">
+        cancel
+      </button>
+    </div>
+    <div *ngIf="!isEditing">
+      <button (click)="changeIsEditing()">
+        edit
+      </button>
+      <button (click)="deleteItem()">
+        delete
+      </button>
+    </div>
+  </div>
+</div>
