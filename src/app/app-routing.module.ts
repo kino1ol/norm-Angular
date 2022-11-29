@@ -6,7 +6,7 @@ import { AuthService } from "./auth/authService.service";
 const routes: Routes = [
   {
     path: "",
-    redirectTo: !!localStorage.getItem('token') ? "todo" : "sign",
+    redirectTo: "sign/in",
     pathMatch: 'full',
   },
   { path: 'sign', loadChildren: () => import('./sign/sign.module').then(m => m.SignModule) },

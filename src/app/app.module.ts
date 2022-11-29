@@ -18,7 +18,7 @@ import { HttpClientModule } from "@angular/common/http";
     // HttpClientInMemoryWebApiModule.forRoot(
     //   InMemoryDataService, {dataEncapsulation: false}
     // )
-  ],
+  ],  
   providers: [],
   bootstrap: [AppComponent]
 })

@@ -11,3 +11,30 @@ button {
   border-radius: 5px;
   justify-content: center;
 }
+
+.item {
+  * {
+    display: flex;
+    gap: 20px;
+    font-size: 18px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  }
+  justify-content: space-between;
+  .itemData {
+    width: 100%;
+    .itemColumn:first-child {
+      width: 5%;
+    }
+    .itemColumn:nth-child(3n) {
+      width: 100%;
+      padding-right: 25px;
+    }
+  }
+  p {
+    margin: 0;
+    word-break: break-word;
+  }
+  input {
+    width: 100%;
+  }
+}

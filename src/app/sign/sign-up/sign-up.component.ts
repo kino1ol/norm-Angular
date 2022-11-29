@@ -29,7 +29,7 @@ export class SignUpComponent {
     pass: new FormControl<string>('',
       [Validators.required, Validators.minLength(8), Validators.maxLength(64), validator],
     ),
-    repeatPassword: new FormControl("", [Validators.required]),
+    repeatPassword: new FormControl("", [Validators.required]),  
     phone: new FormControl("", [Validators.pattern("^[0-9]{9,15}")])
   })
 
@@ -64,3 +64,4 @@ export class SignUpComponent {
     }
   }
 }
+      

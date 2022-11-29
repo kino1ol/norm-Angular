@@ -21,7 +21,6 @@ export class ItemComponent implements OnInit {
 
   constructor(
     private todo: TodoService,
-    private ref: ChangeDetectorRef
   ) { }
 
   public changeIsEditing(): void {
@@ -55,8 +54,11 @@ export class ItemComponent implements OnInit {
     )
   }
 
-  public ngOnInit(): void {
+  public ngOnInit(): void { 
     this.field.setValue(this.item.todo)
     this.completed.setValue(this.item.completed)
+    if (this.item.id === 0) {
+      this.isEditing = true
+    }
   }
 }

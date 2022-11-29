@@ -10,7 +10,7 @@
       <p *ngIf="!isEditing">
         {{ field.value }}
       </p>
-      <textarea *ngIf="isEditing" [formControl]="field"></textarea>
+      <input *ngIf="isEditing" [formControl]="field">
     </div>
   </div>
   <div class="itemActions">

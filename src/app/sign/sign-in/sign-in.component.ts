@@ -29,9 +29,12 @@ export class SignInComponent {
         this.form.value.login as string,
         this.form.value.pass as string,
       ).subscribe((res) => {
-        localStorage.setItem('token', res.token)
-        localStorage.setItem('id', String(res.id))
-        this.route.navigate(['heroes'])
+        if (res.token) {
+          console.log(1)
+          localStorage.setItem('token', res.token)
+          localStorage.setItem('id', String(res.id))
+          this.route.navigate(['todo'])
+        }
       })
       
     } else {

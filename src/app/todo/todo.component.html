@@ -1,4 +1,6 @@
 <div class="todos">
   <button (click)="addItem()">ADD</button>
-  <app-item *ngFor="let item of list.todos" [item]="item" [delete]="deleteItem.bind(this)"></app-item>
+  <div class="items">
+    <app-item *ngFor="let item of list.todos" [item]="item" [delete]="deleteItem.bind(this)"></app-item>
+  </div>
 </div>
