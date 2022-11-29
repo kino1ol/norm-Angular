@@ -46,7 +46,6 @@ export class SignUpComponent {
   }
 
   public submit(): void {
-    console.log(this.form.controls);
     if (this.form.valid && this.passIsEqual()) {
       this.isSubmited = false
       this.signService.signUp({

@@ -16,8 +16,8 @@ export class TodoService {
     return this.http.get<Todos>(`https://dummyjson.com/todos/user/${localStorage.getItem('id')}`)
   }
 
-  public add(body: any): Observable<any> {
-    return this.http.post('https://dummyjson.com/todos/add', JSON.stringify(body), {headers: { 'Content-Type': 'application/json' }})
+  public add(body: Todo): Observable<Todo> {
+    return this.http.post<Todo>('https://dummyjson.com/todos/add', JSON.stringify(body), {headers: { 'Content-Type': 'application/json' }})
   }
 
   public update(body: Todo, id: number): Observable<Todo> {

@@ -11,3 +11,14 @@ export interface Todos {
   skip: number
   limit: number
 }
+
+export type Control = string | null | undefined
+
+export type SingUp = {
+    login: Control
+    name: Control
+    email: Control
+    pass: Control
+    repeatPassword: Control
+    phone: Control
+}

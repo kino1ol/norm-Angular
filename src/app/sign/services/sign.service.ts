@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { SingUp } from 'src/app/todo/types/todo';
 import { User } from '../../types/sing';
 
 @Injectable({
@@ -21,7 +22,7 @@ export class SignService {
     }), {headers: { 'Content-Type': 'application/json' }})
   }
 
-  public signUp(body: any): Observable<unknown> {
+  public signUp(body: SingUp): Observable<unknown> {
     return this.http.post('https://dummyjson.com/users/add', JSON.stringify(body))
   }
 }

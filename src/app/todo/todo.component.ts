@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { TodoService } from './services/todo.service';
-import { Todos } from './types/todo';
+import { Todo, Todos } from './types/todo';
 
 @Component({
   selector: 'app-todo',
@@ -30,7 +30,7 @@ export class TodoComponent implements OnInit {
       todo: '',
       completed: false,
       userId: Number(localStorage.getItem('id')),
-    }).subscribe(
+    } as Todo).subscribe(
       () => {
         this.list.todos.unshift({
           id: 0,
