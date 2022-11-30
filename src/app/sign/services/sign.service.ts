@@ -16,13 +16,13 @@ export class SignService {
   ) { }
 
   public signIn(username: string, password: string): Observable<User> {
-    return this.http.post<User>('https://dummyjson.com/auth/login', JSON.stringify({
+    return this.http.post<User>('https://dummyjson.com/auth/login', {
       username,
       password,
-    }), {headers: { 'Content-Type': 'application/json' }})
+    }, {headers: { 'Content-Type': 'application/json' }})
   }
 
   public signUp(body: SingUp): Observable<unknown> {
-    return this.http.post('https://dummyjson.com/users/add', JSON.stringify(body))
+    return this.http.post('https://dummyjson.com/users/add', body)
   }
 }

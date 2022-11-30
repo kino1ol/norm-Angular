@@ -16,14 +16,23 @@ export class ItemComponent implements OnInit {
 
   public field = new FormControl<string>(this.item?.todo)
   public completed = new FormControl<boolean>(Boolean(this.item?.completed))
-
   public isEditing = false
+
+  private prevField = ''
 
   constructor(
     private todo: TodoService,
   ) { }
 
-  public changeIsEditing(): void {
+  public changeIsEditing(e?: Event): void {
+    console.log((<HTMLButtonElement>e?.target).innerText === "edit")
+    if ((<HTMLButtonElement>e?.target).innerText === "edit") {
+      this.prevField = this.field.value as string
+    }
+    if ((<HTMLButtonElement>e?.target).innerText === "cancel") {
+      this.field.setValue(this.prevField)
+    }
+
     this.isEditing = !this.isEditing
   }
 
@@ -31,30 +40,34 @@ export class ItemComponent implements OnInit {
     if (!e) {
       this.changeIsEditing()
     }
-    this.todo.update({
-      todo: this.field.value as string,
-      completed: this.completed.value,
-    } as Todo,
-      this.item.id).subscribe(
-        () => null,
-        (er) => {
-          console.log(er)
-        }
-      )
+    if (this.item.id !== 0) {
+      this.todo.update({
+        todo: this.field.value as string,
+        completed: this.completed.value,
+      } as Todo,
+        this.item.id).subscribe(
+          () => null,
+          (er) => {
+            console.log(er)
+          }
+        )
+    }
   }
 
   public deleteItem(): void {
-    this.todo.delete(this.item.id).subscribe(
-      (res) => {
-        if (res) {
-          this.delete(this.item.id)
-        }
-      },
-      (er) => console.log(er),
-    )
+    if (this.item.id !== 0) {
+      this.todo.delete(this.item.id).subscribe(
+        (res) => {
+          if (res) {
+            this.delete(this.item.id)
+          }
+        },
+        (er) => console.log(er),
+      )
+    }
   }
 
-  public ngOnInit(): void { 
+  public ngOnInit(): void {
     this.field.setValue(this.item.todo)
     this.completed.setValue(this.item.completed)
     if (this.item.id === 0) {

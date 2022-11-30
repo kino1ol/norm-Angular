@@ -15,15 +15,15 @@
   </div>
   <div class="itemActions">
     <div *ngIf="isEditing">
-      <button (click)="updateItem(undefined)">
+      <button (click)="updateItem()">
         save
       </button>
-      <button (click)="changeIsEditing()">
+      <button (click)="changeIsEditing($event)">
         cancel
       </button>
     </div>
     <div *ngIf="!isEditing">
-      <button (click)="changeIsEditing()">
+      <button (click)="changeIsEditing($event)">
         edit
       </button>
       <button (click)="deleteItem()">

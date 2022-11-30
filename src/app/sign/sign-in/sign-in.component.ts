@@ -1,6 +1,7 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/auth/authService.service';
 import { SignService } from '../services/sign.service';
 
 @Component({
@@ -9,17 +10,18 @@ import { SignService } from '../services/sign.service';
   styleUrls: ['./sign-in.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SignInComponent {
+export class SignInComponent implements OnInit{
 
   public form = new FormGroup({
     login: new FormControl<string>('', Validators.required),
-    pass: new FormControl<string>('', Validators.required)
+    pass: new FormControl<string>('', Validators.required),
   })
   public isSubmited = false
 
   constructor(
     public signService: SignService,
-    public route: Router
+    public route: Router,
+    private user: AuthService
   ) { }
 
   public submit(): void {
@@ -32,7 +34,7 @@ export class SignInComponent {
         if (res.token) {
           console.log(1)
           localStorage.setItem('token', res.token)
-          localStorage.setItem('id', String(res.id))
+          this.user.userID = res.id
           this.route.navigate(['todo'])
         }
       })
@@ -40,6 +42,12 @@ export class SignInComponent {
     } else {
       this.isSubmited = true
     }
+  }
+
+  public ngOnInit(): void {
+    this.user.isAuth().subscribe(() => {
+      this.route.navigate(['todo'])
+    })
   }
 
 }
